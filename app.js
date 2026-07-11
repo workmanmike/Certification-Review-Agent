@@ -1,84 +1,24 @@
-const controls = [
-  { code: 'LD-01', category: 'Leadership', title: 'Safety policy & commitment', desc: 'Signed policy and visible leadership commitment.', status: 'complete', label: 'Compliant' },
-  { code: 'RA-02', category: 'Risk assessment', title: 'Hazard identification', desc: 'Routine and non-routine hazards are assessed.', status: 'complete', label: 'Compliant' },
-  { code: 'TR-03', category: 'Training', title: 'Worker competency', desc: 'Training records demonstrate role competency.', status: 'finding', label: 'Finding' },
-  { code: 'EM-04', category: 'Emergency response', title: 'Emergency action plan', desc: 'A written plan is maintained and tested.', status: 'progress', label: 'In progress', active: true },
-  { code: 'IN-05', category: 'Incident management', title: 'Incident investigation', desc: 'Root causes and corrective actions are documented.', status: 'pending', label: 'Not started' },
-  { code: 'EQ-06', category: 'Equipment safety', title: 'Preventive maintenance', desc: 'Critical equipment is inspected and maintained.', status: 'pending', label: 'Not started' },
-  { code: 'CH-07', category: 'Chemical safety', title: 'Hazard communication', desc: 'Labels and safety data sheets are accessible.', status: 'pending', label: 'Not started' }
+const credentials = [
+  {code:'FP-01',category:'Fall protection & rescue',title:'Competent Climber / Rescuer',desc:'Third-party hands-on climber and rescue qualification.',status:'complete',label:'Accepted',issuer:'Safety LMS / ComTrain',delivery:'Hands-on',standard:'NATE CRTS',expires:'Oct 2026',rule:'Require independent issuer, hands-on skills evaluation, named evaluator or instructor, current dates, and documented fall-protection and rescue scope.'},
+  {code:'RG-02',category:'Rigging',title:'Competent Rigging',desc:'Load handling, signaling, inspection, and rigging practices.',status:'complete',label:'Accepted',issuer:'Safety LMS / ComTrain',delivery:'Hands-on',standard:'A10.48',expires:'Oct 2026',rule:'Verify role-appropriate rigging scope, qualified instructor, completion date, expiration, and third-party issuer.'},
+  {code:'HO-03',category:'Hoisting',title:'Capstan Hoist Operations',desc:'Telecom capstan setup, operation, and hazard controls.',status:'complete',label:'Accepted',issuer:'Safety LMS / ComTrain',delivery:'Practical',standard:'A10.48',expires:'Oct 2026',rule:'Require telecom-specific capstan content, third-party issuer, credential identifier, and current expiration.'},
+  {code:'RF-04',category:'RF safety',title:'RF / EMF Awareness',desc:'Radio-frequency exposure recognition and controls.',status:'complete',label:'Accepted',issuer:'Safety LMS / ComTrain',delivery:'Online allowed',standard:'A10.48',expires:'Oct 2026',rule:'Verify RF/EMF scope, named learner, independent issuer, issue date, and current expiration.'},
+  {code:'FA-05',category:'Emergency medical',title:'First Aid / CPR / AED',desc:'Current blended or classroom credential with skills check.',status:'complete',label:'Accepted',issuer:'ProTrainings',delivery:'Blended + skills',standard:'OSHA 1926.50',expires:'Oct 2026',rule:'HARD GATE: Reject wholly online training. Require in-person skills evaluation, named evaluator, verifiable third-party issuer, and valid certificate.'},
+  {code:'ME-06',category:'Powered access',title:'MEWP Operator',desc:'Operator training with practical evaluation.',status:'complete',label:'Accepted',issuer:'Sunbelt Rentals',delivery:'Practical',standard:'OSHA 1926',expires:'Nov 2027',rule:'Require third-party operator course, practical evaluation, trainer identification, and expiration date.'},
+  {code:'OS-07',category:'Construction safety',title:'OSHA 30 Construction',desc:'Authorized OSHA Outreach construction credential.',status:'complete',label:'Accepted',issuer:'OSHA Outreach provider',delivery:'Authorized',standard:'OSHA 1926',expires:'No expiry',rule:'Verify OSHA Outreach card/course, trainer or provider authenticity, learner identity, and completion date.'},
+  {code:'HC-08',category:'Hazard communication',title:'HazCom / GHS',desc:'Hazard communication and chemical labeling awareness.',status:'complete',label:'Accepted',issuer:'Safety LMS / ComTrain',delivery:'Online allowed',standard:'OSHA 1926.59',expires:'Oct 2026',rule:'Third-party online delivery may be accepted if content, identity, issue date, and verification evidence are present.'},
+  {code:'BB-09',category:'Occupational health',title:'Bloodborne Pathogens',desc:'Exposure-control and universal-precautions training.',status:'finding',label:'Renew soon',issuer:'ProTrainings',delivery:'Online allowed',standard:'OSHA',expires:'Oct 2026',rule:'Verify current third-party certificate and applicable exposure-control content. Flag inside the configured renewal window.'},
+  {code:'NW-10',category:'Industry credential',title:'NWSA TTT1',desc:'Telecommunications Tower Technician 1 credential.',status:'complete',label:'Accepted',issuer:'NWSA',delivery:'Exam + practical',standard:'NWSA / NATE',expires:'Verify registry',rule:'Require official third-party credential verification. Registry status controls acceptance when the document has no clear expiration.'}
 ];
 
-const list = document.getElementById('controlList');
-const detail = {
-  code: document.getElementById('detailCode'), category: document.getElementById('detailCategory'),
-  title: document.getElementById('detailTitle'), description: document.getElementById('detailDescription'),
-  requirement: document.getElementById('detailRequirement'), status: document.getElementById('detailStatus')
-};
-let selected = controls.findIndex(c => c.active);
-let decision = 'finding';
-
-function renderControls() {
-  list.innerHTML = controls.map((c, i) => `
-    <div class="control-item ${c.status} ${i === selected ? 'active' : ''}" data-index="${i}" tabindex="0" role="button">
-      <span class="control-check">${c.status === 'complete' ? '✓' : c.status === 'finding' ? '!' : c.code.split('-')[1]}</span>
-      <div class="control-copy"><small>${c.code} · ${c.category.toUpperCase()}</small><strong>${c.title}</strong><p>${c.desc}</p></div>
-      <span class="control-status ${c.status}">${c.label}</span>
-    </div>`).join('');
-  list.querySelectorAll('.control-item').forEach(item => {
-    const activate = () => selectControl(Number(item.dataset.index));
-    item.addEventListener('click', activate);
-    item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') activate(); });
-  });
+let selected=0;
+const $=id=>document.getElementById(id), list=$('controlList');
+function render(){
+ list.innerHTML=credentials.map((c,i)=>`<div class="control-item ${c.status} ${i===selected?'active':''}" data-index="${i}" tabindex="0" role="button"><span class="control-check">${c.status==='complete'?'✓':'!'}</span><div class="control-copy"><small>${c.code} · ${c.category.toUpperCase()}</small><strong>${c.title}</strong><p>${c.issuer} · ${c.delivery} · Expires ${c.expires}</p></div><span class="control-status ${c.status}">${c.label}</span></div>`).join('');
+ list.querySelectorAll('.control-item').forEach(el=>{const go=()=>select(+el.dataset.index);el.onclick=go;el.onkeydown=e=>{if(e.key==='Enter'||e.key===' ')go()}});
 }
-
-function selectControl(index) {
-  selected = index;
-  const c = controls[index];
-  detail.code.textContent = c.code;
-  detail.category.textContent = c.category.toUpperCase();
-  detail.title.textContent = c.title;
-  detail.description.textContent = c.desc;
-  detail.requirement.textContent = `Verify ${c.title.toLowerCase()} is documented, current, communicated to affected workers, and supported by objective evidence.`;
-  detail.status.textContent = c.label;
-  detail.status.className = `status-pill ${c.status}`;
-  document.getElementById('reviewNotes').value = c.status === 'progress' ? 'Plan is current. Night-shift accountability procedure needs confirmation.' : '';
-  document.querySelector('.review-panel').classList.remove('closed');
-  renderControls();
-}
-
-document.querySelectorAll('[data-decision]').forEach(button => button.addEventListener('click', () => {
-  decision = button.dataset.decision;
-  document.querySelectorAll('[data-decision]').forEach(b => b.classList.toggle('selected', b === button));
-}));
-
-function toast(message) {
-  const el = document.getElementById('toast');
-  el.textContent = message; el.classList.add('show');
-  clearTimeout(window.toastTimer); window.toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
-}
-
-document.getElementById('completeReview').addEventListener('click', () => {
-  const c = controls[selected];
-  c.status = decision === 'compliant' ? 'complete' : decision === 'finding' ? 'finding' : 'complete';
-  c.label = decision === 'compliant' ? 'Compliant' : decision === 'finding' ? 'Finding' : 'N/A';
-  detail.status.textContent = c.label; detail.status.className = `status-pill ${c.status}`;
-  const completed = controls.filter(x => x.status === 'complete' || x.status === 'finding').length;
-  document.getElementById('reviewedCount').textContent = Math.min(25, 15 + completed);
-  document.getElementById('findingCount').textContent = 4 + controls.filter(x => x.status === 'finding').length;
-  document.getElementById('readinessScore').textContent = `${Math.round(((15 + completed) / 25) * 100)}%`;
-  renderControls(); toast(`${c.code} review completed`);
-});
-document.getElementById('saveDraft').addEventListener('click', () => toast('Draft saved locally'));
-document.getElementById('closeReview').addEventListener('click', () => document.querySelector('.review-panel').classList.add('closed'));
-document.getElementById('addEvidence').addEventListener('click', () => {
-  const item = document.createElement('div'); item.className = 'evidence-item';
-  item.innerHTML = '<span class="file-icon doc">NEW</span><div><strong>Supporting_evidence.docx</strong><small>Ready to upload · Just now</small></div><button type="button">•••</button>';
-  document.getElementById('evidenceList').appendChild(item); toast('Evidence placeholder added');
-});
-document.getElementById('exportBtn').addEventListener('click', () => {
-  const summary = `CERTIFICATION REVIEW\nNorthstar Manufacturing\nReview: SC-2026-014\nReadiness: ${document.getElementById('readinessScore').textContent}\nOpen findings: ${document.getElementById('findingCount').textContent}\n\n${controls.map(c => `${c.code} | ${c.title} | ${c.label}`).join('\n')}`;
-  const blob = new Blob([summary], {type: 'text/plain'}); const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href = url; a.download = 'SC-2026-014-review.txt'; a.click(); URL.revokeObjectURL(url); toast('Review exported');
-});
-
-renderControls();
+function select(i){selected=i;const c=credentials[i];$('detailCode').textContent=c.code;$('detailCategory').textContent=c.category.toUpperCase();$('detailTitle').textContent=c.title;$('detailDescription').textContent=c.desc;$('detailRequirement').textContent=c.rule;$('detailStatus').textContent=c.label;$('detailStatus').className=`status-pill ${c.status}`;document.querySelector('.gate-strip').innerHTML=`<span>3RD PARTY</span><b>Required</b><span>DELIVERY</span><b>${c.delivery}</b><span>STANDARD</span><b>${c.standard}</b>`;$('evidenceList').innerHTML=`<div class="evidence-item"><span class="file-icon pdf">CERT</span><div><strong>${c.title} certificate</strong><small>${c.issuer} · Expires ${c.expires}</small></div><button type="button">•••</button></div><div class="evidence-item"><span class="file-icon doc">${c.status==='complete'?'PASS':'FLAG'}</span><div><strong>AI validation</strong><small>${c.status==='complete'?'Third-party and core evidence gates passed':'Renewal or registry follow-up required'}</small></div><button type="button">•••</button></div>`;$('reviewNotes').value=`AI reviewed issuer independence, employee identity, course scope, delivery method, dates, and verification evidence against ${c.standard}.`;$('agentVerdict').textContent=c.status==='complete'?'COMPLIANT':'ACTION REQUIRED';$('agentReason').textContent=c.status==='complete'?'All mandatory evidence gates passed.':'Credential needs renewal or registry verification.';document.querySelector('.agent-verdict').classList.toggle('flag',c.status!=='complete');document.querySelector('.agent-verdict>span').textContent=c.status==='complete'?'✓':'!';document.querySelector('.review-panel').classList.remove('closed');render()}
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(window.tt);window.tt=setTimeout(()=>t.classList.remove('show'),2400)}
+$('runReview').onclick=()=>toast('AI review complete — 10 certificates analyzed');$('newReview').onclick=()=>toast('Certificate upload intake ready');$('closeReview').onclick=()=>document.querySelector('.review-panel').classList.add('closed');$('addEvidence').onclick=()=>toast('Certificate upload intake ready');
+$('exportBtn').onclick=()=>{const report=`TELECOM CERTIFICATION AUDIT\nEmployee: T. Anderson\nRule set: ANSI/ASSP A10.48-2023 | OSHA 29 CFR 1926 | ANSI/ASSP Z359 | NATE CRTS\n\nPOLICY GATES\n- Third-party training only; in-house training rejected\n- First Aid/CPR must include in-person skills evaluation; online-only rejected\n\n${credentials.map(c=>`${c.code} | ${c.title} | ${c.label} | ${c.issuer} | ${c.expires}`).join('\n')}\n\nDecision-support record; final employer verification required.`;const url=URL.createObjectURL(new Blob([report],{type:'text/plain'}));const a=document.createElement('a');a.href=url;a.download='TC-2026-0711-audit.txt';a.click();URL.revokeObjectURL(url);toast('Audit exported')};
+render();

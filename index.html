@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Certify — a focused safety certification review workspace." />
-  <title>Certify — Safety review workspace</title>
+  <title>TowerCert — Telecom credential review</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700&display=swap" rel="stylesheet">
@@ -15,24 +15,24 @@
     <aside class="sidebar">
       <a class="brand" href="#" aria-label="Certify home">
         <span class="brand-mark"><span></span><span></span></span>
-        <span>certify</span>
+        <span>certreview ai</span>
       </a>
 
       <nav class="primary-nav" aria-label="Primary navigation">
-        <a class="active" href="#overview"><span class="nav-icon">⌂</span>Overview</a>
-        <a href="#reviews"><span class="nav-icon">▣</span>Reviews <span class="nav-count">3</span></a>
-        <a href="#standards"><span class="nav-icon">◇</span>Standards</a>
-        <a href="#evidence"><span class="nav-icon">▤</span>Evidence</a>
+        <a class="active" href="#overview"><span class="nav-icon">⌂</span>Employee</a>
+        <a href="#reviews"><span class="nav-icon">▣</span>Credentials <span class="nav-count">10</span></a>
+        <a href="#standards"><span class="nav-icon">◇</span>Rule set</a>
+        <a href="#evidence"><span class="nav-icon">▤</span>Audit log</a>
       </nav>
 
       <div class="sidebar-bottom">
         <div class="progress-card">
           <div class="progress-ring" style="--progress: 72"><span>72%</span></div>
-          <div><strong>Q3 readiness</strong><small>18 of 25 controls</small></div>
+          <div><strong>Telecom ready</strong><small>9 of 10 credentials</small></div>
         </div>
         <button class="profile-button" type="button">
           <span class="avatar">MC</span>
-          <span><strong>Maya Chen</strong><small>Lead reviewer</small></span>
+          <span><strong>AI review agent</strong><small>Telecom compliance</small></span>
           <span class="kebab">•••</span>
         </button>
       </div>
@@ -40,86 +40,79 @@
 
     <main class="main-content">
       <header class="topbar">
-        <div class="breadcrumb"><span>Reviews</span><b>/</b><strong>Active review</strong></div>
+        <div class="breadcrumb"><span>Certification review</span><b>/</b><strong>Telecom field eligibility</strong></div>
         <div class="top-actions">
           <button class="icon-button" type="button" aria-label="Search">⌕</button>
           <button class="icon-button notification" type="button" aria-label="Notifications">♧<span></span></button>
-          <button class="primary-button" id="exportBtn" type="button">Export review <span>↗</span></button>
+          <button class="primary-button" id="exportBtn" type="button">Export AI report <span>↗</span></button>
         </div>
       </header>
 
       <section class="page-heading" id="overview">
         <div>
-          <div class="eyebrow"><span class="pulse-dot"></span> IN REVIEW · SC-2026-014</div>
-          <h1>Northstar Manufacturing</h1>
-          <p>Annual workplace safety certification · Cedar Rapids facility</p>
+          <div class="eyebrow"><span class="pulse-dot"></span> AI REVIEW COMPLETE · TC-2026-0711</div>
+          <h1>T. Anderson</h1>
+          <p>Tower technician · Third-party credential verification</p>
         </div>
         <div class="review-meta">
           <div class="reviewer-stack"><span>MC</span><span>JL</span><span>+2</span></div>
-          <div><small>Due date</small><strong>August 18, 2026</strong></div>
+          <div><small>Evaluated against</small><strong>A10.48 · OSHA 1926 · NATE CRTS</strong></div>
           <button class="more-button" type="button">•••</button>
         </div>
       </section>
 
       <section class="stats-grid" aria-label="Review statistics">
-        <article><div class="stat-icon purple">✓</div><div><small>Controls reviewed</small><strong><span id="reviewedCount">18</span> <em>/ 25</em></strong></div><span class="trend">+4 this week</span></article>
-        <article><div class="stat-icon amber">!</div><div><small>Open findings</small><strong id="findingCount">5</strong></div><span class="trend warning">2 high priority</span></article>
-        <article><div class="stat-icon blue">▤</div><div><small>Evidence files</small><strong>42</strong></div><span class="trend">6 pending</span></article>
-        <article><div class="stat-icon green">↗</div><div><small>Readiness score</small><strong id="readinessScore">72%</strong></div><span class="trend positive">On track</span></article>
+        <article><div class="stat-icon purple">✓</div><div><small>Accepted credentials</small><strong><span id="reviewedCount">9</span> <em>/ 10</em></strong></div><span class="trend">Third-party verified</span></article>
+        <article><div class="stat-icon amber">!</div><div><small>Action required</small><strong id="findingCount">1</strong></div><span class="trend warning">Renewal approaching</span></article>
+        <article><div class="stat-icon blue">▤</div><div><small>Standards mapped</small><strong>4</strong></div><span class="trend">A10.48 · 1926 · Z359 · CRTS</span></article>
+        <article><div class="stat-icon green">↗</div><div><small>Field readiness</small><strong id="readinessScore">90%</strong></div><span class="trend positive">Conditional pass</span></article>
       </section>
 
       <section class="workspace-grid" id="reviews">
         <article class="panel controls-panel">
           <div class="panel-header">
-            <div><h2>Control review</h2><p>Work through each certification requirement.</p></div>
-            <button class="filter-button" type="button">≡ <span>All controls</span>⌄</button>
+            <div><h2>AI compliance results</h2><p>Certificate-by-certificate rule evaluation.</p></div>
+            <button class="filter-button" type="button">≡ <span>Required for role</span>⌄</button>
           </div>
           <div class="control-list" id="controlList"></div>
         </article>
 
         <aside class="review-panel panel" aria-label="Selected control review">
           <div class="panel-header compact">
-            <div class="control-code" id="detailCode">EM-04</div>
+            <div class="control-code" id="detailCode">FP-01</div>
             <button class="close-button" id="closeReview" type="button" aria-label="Close">×</button>
           </div>
           <div class="review-body">
             <div class="review-title-row">
-              <div><span class="category-label" id="detailCategory">EMERGENCY RESPONSE</span><h2 id="detailTitle">Emergency action plan</h2></div>
-              <span class="status-pill progress" id="detailStatus">In progress</span>
+              <div><span class="category-label" id="detailCategory">FALL PROTECTION & RESCUE</span><h2 id="detailTitle">Competent Climber / Rescuer</h2></div>
+              <span class="status-pill complete" id="detailStatus">Accepted</span>
             </div>
-            <p class="description" id="detailDescription">A written emergency action plan is maintained, communicated, and tested at planned intervals.</p>
+            <p class="description" id="detailDescription">Third-party, hands-on climber and rescue qualification for communication structures.</p>
 
             <div class="requirement-box">
-              <strong>Requirement</strong>
-              <p id="detailRequirement">Verify the plan addresses evacuation, accountability, emergency contacts, and responsibilities for all shifts.</p>
+              <strong>Agent rule</strong>
+              <p id="detailRequirement">Issuer must be independent of the employer. Require hands-on evaluation, named evaluator, training date, current expiration, and CRTS-aligned fall protection and rescue scope.</p>
             </div>
+
+            <div class="gate-strip"><span>3RD PARTY</span><b>Required</b><span>DELIVERY</span><b>Hands-on</b><span>STANDARD</span><b>NATE CRTS</b></div>
 
             <div class="section-heading"><h3>Evidence</h3><button type="button" id="addEvidence">+ Add evidence</button></div>
             <div class="evidence-list" id="evidenceList">
-              <div class="evidence-item"><span class="file-icon pdf">PDF</span><div><strong>Emergency_Action_Plan_2026.pdf</strong><small>2.4 MB · Added Jul 8</small></div><button type="button">•••</button></div>
-              <div class="evidence-item"><span class="file-icon doc">DOC</span><div><strong>Evacuation_Drill_Log.docx</strong><small>824 KB · Added Jul 9</small></div><button type="button">•••</button></div>
+              <div class="evidence-item"><span class="file-icon pdf">CERT</span><div><strong>Climber / Rescuer certificate</strong><small>Safety LMS / ComTrain · Current through Oct 2026</small></div><button type="button">•••</button></div>
+              <div class="evidence-item"><span class="file-icon doc">PASS</span><div><strong>Automated validation</strong><small>Independent issuer · 16 hr · instructor named · QR verification</small></div><button type="button">•••</button></div>
             </div>
 
-            <label class="notes-label" for="reviewNotes">Reviewer notes <span>Optional</span></label>
-            <textarea id="reviewNotes" placeholder="Add context, observations, or follow-up details…">Plan is current. Night-shift accountability procedure needs confirmation.</textarea>
+            <label class="notes-label" for="reviewNotes">AI review summary <span>Read only</span></label>
+            <textarea id="reviewNotes" readonly>Certificate includes employee name, 16-hour Competent Climber/Rescuer course, instructor, dates, credential number, and QR verification.</textarea>
 
-            <div class="decision-group">
-              <span>Assessment</span>
-              <div class="decision-options">
-                <button type="button" data-decision="compliant"><span>✓</span> Compliant</button>
-                <button class="selected" type="button" data-decision="finding"><span>!</span> Finding</button>
-                <button type="button" data-decision="na"><span>—</span> N/A</button>
-              </div>
-            </div>
+            <div class="decision-group"><span>AI verdict</span><div class="agent-verdict"><span>✓</span><div><strong id="agentVerdict">COMPLIANT</strong><small id="agentReason">All mandatory evidence gates passed.</small></div></div></div>
           </div>
-          <div class="review-footer">
-            <button class="secondary-button" id="saveDraft" type="button">Save draft</button>
-            <button class="primary-button" id="completeReview" type="button">Complete review <span>→</span></button>
-          </div>
+          <div class="review-footer"><button class="secondary-button" id="newReview" type="button">Upload certificates</button><button class="primary-button" id="runReview" type="button">Run AI review <span>→</span></button></div>
         </aside>
       </section>
     </main>
   </div>
+  <section class="standards-footer" id="standards"><strong>Rule set</strong><span>ANSI/ASSP A10.48-2023</span><span>OSHA 29 CFR 1926</span><span>ANSI/ASSP Z359</span><span>NATE Climber/Rescuer Training Standard</span><small>Decision support only — final employer verification remains required.</small></section>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="app.js"></script>
 </body>
