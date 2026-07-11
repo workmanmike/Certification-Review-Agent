@@ -61,17 +61,17 @@
       </section>
 
       <section class="stats-grid" aria-label="Review statistics">
-        <article><div class="stat-icon purple">✓</div><div><small>Accepted credentials</small><strong><span id="reviewedCount">9</span> <em>/ 10</em></strong></div><span class="trend">Third-party verified</span></article>
+        <article><div class="stat-icon purple">✓</div><div><small>Site access gate</small><strong><span id="reviewedCount">5</span> <em>/ 5</em></strong></div><span class="trend positive">Eligible for site access</span></article>
+        <article><div class="stat-icon green">↗</div><div><small>Work-at-heights gate</small><strong id="heightGate">7 / 7</strong></div><span class="trend positive">Eligible to work at heights</span></article>
         <article><div class="stat-icon amber">!</div><div><small>Action required</small><strong id="findingCount">1</strong></div><span class="trend warning">Renewal approaching</span></article>
-        <article><div class="stat-icon blue">▤</div><div><small>Standards mapped</small><strong>4</strong></div><span class="trend">A10.48 · 1926 · Z359 · CRTS</span></article>
-        <article><div class="stat-icon green">↗</div><div><small>Field readiness</small><strong id="readinessScore">90%</strong></div><span class="trend positive">Conditional pass</span></article>
+        <article><div class="stat-icon blue">▤</div><div><small>Overall eligibility</small><strong id="readinessScore">PASS</strong></div><span class="trend positive">All role gates satisfied</span></article>
       </section>
 
       <section class="workspace-grid" id="reviews">
         <article class="panel controls-panel">
           <div class="panel-header">
             <div><h2>AI compliance results</h2><p>Certificate-by-certificate rule evaluation.</p></div>
-            <button class="filter-button" type="button">≡ <span>Required for role</span>⌄</button>
+            <button class="filter-button" type="button">≡ <span>Site + heights</span>⌄</button>
           </div>
           <div class="control-list" id="controlList"></div>
         </article>
