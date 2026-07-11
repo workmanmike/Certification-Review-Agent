@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Certify — a focused safety certification review workspace." />
+  <title>Certify — Safety review workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Certify home">
+        <span class="brand-mark"><span></span><span></span></span>
+        <span>certify</span>
+      </a>
+
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a class="active" href="#overview"><span class="nav-icon">⌂</span>Overview</a>
+        <a href="#reviews"><span class="nav-icon">▣</span>Reviews <span class="nav-count">3</span></a>
+        <a href="#standards"><span class="nav-icon">◇</span>Standards</a>
+        <a href="#evidence"><span class="nav-icon">▤</span>Evidence</a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="progress-card">
+          <div class="progress-ring" style="--progress: 72"><span>72%</span></div>
+          <div><strong>Q3 readiness</strong><small>18 of 25 controls</small></div>
+        </div>
+        <button class="profile-button" type="button">
+          <span class="avatar">MC</span>
+          <span><strong>Maya Chen</strong><small>Lead reviewer</small></span>
+          <span class="kebab">•••</span>
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="breadcrumb"><span>Reviews</span><b>/</b><strong>Active review</strong></div>
+        <div class="top-actions">
+          <button class="icon-button" type="button" aria-label="Search">⌕</button>
+          <button class="icon-button notification" type="button" aria-label="Notifications">♧<span></span></button>
+          <button class="primary-button" id="exportBtn" type="button">Export review <span>↗</span></button>
+        </div>
+      </header>
+
+      <section class="page-heading" id="overview">
+        <div>
+          <div class="eyebrow"><span class="pulse-dot"></span> IN REVIEW · SC-2026-014</div>
+          <h1>Northstar Manufacturing</h1>
+          <p>Annual workplace safety certification · Cedar Rapids facility</p>
+        </div>
+        <div class="review-meta">
+          <div class="reviewer-stack"><span>MC</span><span>JL</span><span>+2</span></div>
+          <div><small>Due date</small><strong>August 18, 2026</strong></div>
+          <button class="more-button" type="button">•••</button>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Review statistics">
+        <article><div class="stat-icon purple">✓</div><div><small>Controls reviewed</small><strong><span id="reviewedCount">18</span> <em>/ 25</em></strong></div><span class="trend">+4 this week</span></article>
+        <article><div class="stat-icon amber">!</div><div><small>Open findings</small><strong id="findingCount">5</strong></div><span class="trend warning">2 high priority</span></article>
+        <article><div class="stat-icon blue">▤</div><div><small>Evidence files</small><strong>42</strong></div><span class="trend">6 pending</span></article>
+        <article><div class="stat-icon green">↗</div><div><small>Readiness score</small><strong id="readinessScore">72%</strong></div><span class="trend positive">On track</span></article>
+      </section>
+
+      <section class="workspace-grid" id="reviews">
+        <article class="panel controls-panel">
+          <div class="panel-header">
+            <div><h2>Control review</h2><p>Work through each certification requirement.</p></div>
+            <button class="filter-button" type="button">≡ <span>All controls</span>⌄</button>
+          </div>
+          <div class="control-list" id="controlList"></div>
+        </article>
+
+        <aside class="review-panel panel" aria-label="Selected control review">
+          <div class="panel-header compact">
+            <div class="control-code" id="detailCode">EM-04</div>
+            <button class="close-button" id="closeReview" type="button" aria-label="Close">×</button>
+          </div>
+          <div class="review-body">
+            <div class="review-title-row">
+              <div><span class="category-label" id="detailCategory">EMERGENCY RESPONSE</span><h2 id="detailTitle">Emergency action plan</h2></div>
+              <span class="status-pill progress" id="detailStatus">In progress</span>
+            </div>
+            <p class="description" id="detailDescription">A written emergency action plan is maintained, communicated, and tested at planned intervals.</p>
+
+            <div class="requirement-box">
+              <strong>Requirement</strong>
+              <p id="detailRequirement">Verify the plan addresses evacuation, accountability, emergency contacts, and responsibilities for all shifts.</p>
+            </div>
+
+            <div class="section-heading"><h3>Evidence</h3><button type="button" id="addEvidence">+ Add evidence</button></div>
+            <div class="evidence-list" id="evidenceList">
+              <div class="evidence-item"><span class="file-icon pdf">PDF</span><div><strong>Emergency_Action_Plan_2026.pdf</strong><small>2.4 MB · Added Jul 8</small></div><button type="button">•••</button></div>
+              <div class="evidence-item"><span class="file-icon doc">DOC</span><div><strong>Evacuation_Drill_Log.docx</strong><small>824 KB · Added Jul 9</small></div><button type="button">•••</button></div>
+            </div>
+
+            <label class="notes-label" for="reviewNotes">Reviewer notes <span>Optional</span></label>
+            <textarea id="reviewNotes" placeholder="Add context, observations, or follow-up details…">Plan is current. Night-shift accountability procedure needs confirmation.</textarea>
+
+            <div class="decision-group">
+              <span>Assessment</span>
+              <div class="decision-options">
+                <button type="button" data-decision="compliant"><span>✓</span> Compliant</button>
+                <button class="selected" type="button" data-decision="finding"><span>!</span> Finding</button>
+                <button type="button" data-decision="na"><span>—</span> N/A</button>
+              </div>
+            </div>
+          </div>
+          <div class="review-footer">
+            <button class="secondary-button" id="saveDraft" type="button">Save draft</button>
+            <button class="primary-button" id="completeReview" type="button">Complete review <span>→</span></button>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
